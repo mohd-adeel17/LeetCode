@@ -46,18 +46,16 @@ class Solution
 
 {
     
-    // public class Arcomparator implements Comparator<Job>{
-    //     public int compare(Job o1, Job o2){
-    //         if(o1.profit == o2.profit){
-    //             return o1.deadline - o2.deadline;
-    //         }
-    //         return o2.profit - o1.profit;
-    //     }
-    // }
+    public class Arcomparator implements Comparator<Job>{
+        public int compare(Job o1, Job o2){
+            
+            return o2.profit - o1.profit;
+        }
+    }
     int[] JobScheduling(Job arr[], int n)
     {
-        //Arcomparator cm = new Arcomparator();
-        Arrays.sort(arr,(a,b)->(b.profit - a.profit));
+        Arcomparator cm = new Arcomparator();
+        Arrays.sort(arr,cm);
         int max=0;
         for(int i=0;i<arr.length;i++){
             if(arr[i].deadline > max){
