@@ -52,7 +52,7 @@ class Solution {
         // Code here
         ArrayList<Integer>list = new ArrayList<>();
         boolean vis []= new boolean [V+1];
-        vis[0]=true;
+       // vis[0]=true;
         dfs(0,vis,adj,list);
         return list;
         
