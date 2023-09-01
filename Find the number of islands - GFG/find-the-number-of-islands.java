@@ -38,27 +38,28 @@ class Solution {
     }
     public void bfs (int row , int col , int vis[][] , char grid[][]){
         vis[row][col]=1;
-        Queue<Pair>q = new LinkedList<>();
-        q.add(new Pair(row , col));
+        // Queue<Pair>q = new LinkedList<>();
+        // q.add(new Pair(row , col));
         
         int m = grid.length;
         int n= grid[0].length;
-        while(!q.isEmpty()){
-            int r = q.peek().first;
-            int c = q.peek().second;
-            q.remove();
+        // while(!q.isEmpty()){
+        //     int r = q.peek().first;
+        //     int c = q.peek().second;
+        //     q.remove();
 
             for(int i = -1 ;i<=1;i++){
                 for(int j=-1 ;j<=1 ; j++){
-                    int newrow = r + i;
-                    int newcol = c + j;
+                    int newrow = row + i;
+                    int newcol = col + j;
                     if(newrow>=0 && newrow< m && newcol>=0 && newcol<n && vis[newrow][newcol]==0 && grid[newrow][newcol]=='1'){
                         vis[newrow][newcol]=1;
-                        q.add(new Pair(newrow,newcol));
+                        // q.add(new Pair(newrow,newcol));
+                        bfs(newrow,newcol,vis,grid);
                     }
                 }
             }
-        }
+        
     }
     // Function to find the number of islands.
     public int numIslands(char[][] grid) {
