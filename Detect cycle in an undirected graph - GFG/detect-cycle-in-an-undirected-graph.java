@@ -42,26 +42,26 @@ class Solution {
             this.second = second;
         }
     }
-    public boolean detectCycle(int node , ArrayList<ArrayList<Integer>> adj, int vis[] ){
+    public boolean detectCycle(int node ,int parent, ArrayList<ArrayList<Integer>> adj, int vis[] ){
         vis[node]=1;
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(node,-1));
+        // Queue<Pair> q = new LinkedList<>();
+        // q.add(new Pair(node,-1));
 
-        while(!q.isEmpty()){
-            int first = q.peek().first;
-            int parent = q.peek().second;
-            q.poll();
+        // while(!q.isEmpty()){
+        //     int first = q.peek().first;
+        //     int parent = q.peek().second;
+        //     q.poll();
 
-            for(Integer val : adj.get(first)){
+            for(Integer val : adj.get(node)){
                 if(vis[val]==0){
                     vis[val]=1;
-                    q.add(new Pair(val,first));
+                    if(detectCycle(val,node,adj,vis)==true){return true;}
                 }
                 else if(val != parent){
                     return true;
                 }
             }
-        }
+        //}
         return false;
     }
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
@@ -70,7 +70,7 @@ class Solution {
 
         for(int i=0;i<V;i++){
             if(vis[i]==0){
-                if(detectCycle(i,adj,vis)==true){
+                if(detectCycle(i,-1,adj,vis)==true){
                     return true;
                 }
 
