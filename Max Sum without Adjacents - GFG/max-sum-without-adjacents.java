@@ -31,25 +31,38 @@ public class Main {
 //User function Template for Java
 
 class Solution {
+    public static int solve(int i,int[]nums,int []dp){
+        if(i==0){
+            return nums[i];
+        }
+        if(i<0){return 0;}
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        int take = nums[i] + solve(i-2,nums,dp);
+        int nottake = solve(i-1,nums,dp);
+        
+        return dp[i]=Math.max(take,nottake);
+    }
     int findMaxSum(int nums[], int n) {
         // n=nums.length;
         int dp[]=new int[n+1];
         Arrays.fill(dp,-1);
         dp[0]=nums[0];
-        for(int i=1;i<nums.length;i++){
-            int pick = 0;
-            pick = pick + nums[i];
-            if(i>1){
-                pick+=dp[i-2];
-            }
-            int notpick = dp[i-1];
+        // for(int i=1;i<nums.length;i++){
+        //     int pick = 0;
+        //     pick = pick + nums[i];
+        //     if(i>1){
+        //         pick+=dp[i-2];
+        //     }
+        //     int notpick = dp[i-1];
 
-            dp[i]=Math.max(pick,notpick);
+        //     dp[i]=Math.max(pick,notpick);
 
 
 
-        }
-       // return solve(n-1,nums,dp);
-       return dp[n-1];
+        // }
+        return solve(n-1,nums,dp);
+       //return dp[n-1];
     }
 }
