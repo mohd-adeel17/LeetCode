@@ -55,14 +55,37 @@ class Solution{
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 dp[i][j]=-1;
-               }
-           }
-
-        int max = -1;
-        for(int i=0;i<Matrix[0].length;i++){
-            int ans =  solve (0, i, Matrix,dp);
-            max = Math.max(ans,max);
+            }
         }
-        return max;
+        for(int j=0;j<m;j++){
+            dp[m-1][j]=Matrix[m-1][j];
+        }
+        
+        for(int i=m-2;i>=0;i--){
+            for(int j=0;j<n;j++){
+                int s = Integer.MIN_VALUE;
+                int t = Integer.MIN_VALUE;
+                int u = Integer.MIN_VALUE;
+                
+                s = Matrix[i][j]+dp[i+1][j];
+                if(j-1>=0){t = Matrix[i][j]+dp[i+1][j-1];}
+                if(j+1 < n){u = Matrix[i][j]+dp[i+1][j+1];}
+                 dp[i][j] = Math.max(s,Math.max(t,u));
+            }
+        }
+        int maxi =-1;
+        for(int i=0;i<n;i++){
+            maxi = Math.max(dp[0][i],maxi);
+        }
+        return maxi;
+
+        // int max = -1;
+        // for(int i=0;i<Matrix[0].length;i++){
+        //     int ans =  solve (0, i, Matrix,dp);
+        //     max = Math.max(ans,max);
+        
+        
+        // }
+        // return max;
     }
 }
