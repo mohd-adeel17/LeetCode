@@ -52,14 +52,37 @@ class Solution{
 	    int dp [][]= new int [M][V+1];
 	    for(int i=0;i<M;i++){
 	        for(int j=0;j<=V;j++){
-	            dp[i][j]=-1;
+	            dp[i][j]=0;
 	        }
 	    }
-	    
-	    int ans = solve(M-1,coins,V,dp);
-	    if(ans >= (int)1e9){
-	        return -1;
+	    for(int j=0;j<=V;j++){
+	        if(j % coins[0] == 0){
+                dp[0][j] = j/coins[0];
+            }
+            else{
+                dp[0][j] = (int)1e9;
+            }
 	    }
-	    return ans;
+	    
+	    for(int i=1;i<M;i++){
+	        for(int j=0;j<=V;j++){
+	            int take = Integer.MAX_VALUE;
+                if(coins [i] <= j){
+                take = 1 + dp[i][j-coins[i]];
+                }
+                int nottake = dp[i-1][j];
+        
+               dp[i][j] = Math.min(take,nottake);
+	        }
+	    }
+	   if(dp[M-1][V]>=(int)1e9){
+	       return -1;
+	   }
+	   return dp[M-1][V];
+	   // int ans = solve(M-1,coins,V,dp);
+	   // if(ans >= (int)1e9){
+	   //     return -1;
+	   // }
+	   // return ans;
 	} 
 }
