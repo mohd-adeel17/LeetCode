@@ -58,9 +58,39 @@ class Solution{
         int dp [][]= new int [N][W+1];
         for(int i=0;i<N;i++){
             for(int j=0;j<=W;j++){
-                dp[i][j]= -1;
+                dp[i][j]=0;
             }
         }
-       return solve (N-1 , W, val,wt,dp);
+        for(int k = 0;k<=W;k++){
+            if(k >= wt[0] ){
+                dp[0][k] = (int)(val[0]) * (k/wt[0]);
+            }
+            // dp[0][k] = 0;
+        }
+        
+        for(int i=1;i<N;i++){
+            for(int j=0;j<=W;j++){
+                int take = 0;
+                if(wt[i]<=j){
+                take = val[i] + dp[i][j-wt[i]];
+                }
+                int nottake = dp[i-1][j];
+                dp[i][j] = Math.max(take,nottake);
+            }
+        }
+        // for(int i=0;i<N;i++){
+        //     for(int j=0;j<=W;j++){
+        //         System.out.print(dp[i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
+        
+        
+        
+        return dp[N-1][W];
+        
+        
+        
+      // return solve (N-1 , W, val,wt,dp);
     }
 }
