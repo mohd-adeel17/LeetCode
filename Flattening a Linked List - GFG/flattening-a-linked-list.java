@@ -144,10 +144,10 @@ class GfG
         return ans.bottom;
     }
     Node flattening (Node root){
-        if( root.next==null){
+        if(root.next==null){
             return root;
         }
-        flatten(root.next);
+        flattening(root.next);
         
         return merge(root,root.next);
         
