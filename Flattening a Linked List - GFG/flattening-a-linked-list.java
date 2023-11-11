@@ -144,7 +144,7 @@ class GfG
         return ans.bottom;
     }
     Node flattening (Node root){
-        if(root == null || root.next==null){
+        if( root.next==null){
             return root;
         }
         flatten(root.next);
