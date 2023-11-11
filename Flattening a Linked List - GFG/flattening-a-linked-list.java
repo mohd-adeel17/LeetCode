@@ -143,17 +143,14 @@ class GfG
         }
         return ans.bottom;
     }
-    Node flattening (Node root){
-        if(root.next==null){
-            return root;
-        }
-        flattening(root.next);
-        
-        return merge(root,root.next);
-        
-    }
+    
     Node flatten(Node root)
     {
-	      return flattening(root);
+	    if(root.next==null){
+            return root;
+        }
+        flatten(root.next);
+        
+        return merge(root,root.next);
     }
 }
