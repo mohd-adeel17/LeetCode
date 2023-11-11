@@ -149,8 +149,8 @@ class GfG
         }
         flatten(root.next);
         
-        Node temp = merge(root,root.next);
-        return temp;
+        return merge(root,root.next);
+        
     }
     Node flatten(Node root)
     {
